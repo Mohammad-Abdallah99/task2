@@ -26,15 +26,34 @@ const displayUsers = async()=>{
                     </div> 
                     <p class="website">${user.website}</p>
                     <div class="address">
-                        <address>${user.address.street} ${user.address.suite} ${user.address.city} ${user.address.zipcode}
-                            <div class="geo">
-                                <p>${user.address.geo.lat}</p>
-                                <p>${user.address.geo.lng}</p>
-                            </div>
-                        </address>
+                        <address>${user.address.street} ${user.address.suite} ${user.address.city} ${user.address.zipcode}</address>
+                        <p>LAT : ${user.address.geo.lat}</p>
+                        <p>LNG : ${user.address.geo.lng}</p>
                     </div>                  
                 </div>`).join('');
     document.querySelector('.row').innerHTML=result;
 }
 
 displayUsers();
+
+document.querySelector('.row').addEventListener('mouseover', function(event) {
+    if (event.target.closest('.company-name')) {
+        const companyContainer = event.target.closest('.company');
+        const companyInfo = companyContainer.querySelector('.company-info');
+        if (companyInfo) {
+            companyInfo.style.opacity = '1';
+            companyInfo.style.visibility = 'visible';
+        }
+    }
+});
+
+document.querySelector('.row').addEventListener('mouseout', function(event) {
+    if (event.target.closest('.company-name')) {
+        const companyContainer = event.target.closest('.company');
+        const companyInfo = companyContainer.querySelector('.company-info');
+        if (companyInfo) {
+            companyInfo.style.opacity = '0';
+            companyInfo.style.visibility = 'hidden';
+        }
+    }
+});
